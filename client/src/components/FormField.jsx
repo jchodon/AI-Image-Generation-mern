@@ -1,7 +1,7 @@
 import React from "react";
 
-const FormFilled = () => {
+const FormField = () => {
   return <div>Form</div>;
 };
 
-export default FormFilled;
+export default FormField;
