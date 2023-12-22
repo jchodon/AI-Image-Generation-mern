@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Form, Link, Route, Routes } from "react-router-dom";
 import { logo } from "./assets/index.js";
-import { Home, CreatePost } from "./pages/index.js";
+import { Home, CreatePost } from "./pages";
 function App() {
   return (
     <BrowserRouter>
