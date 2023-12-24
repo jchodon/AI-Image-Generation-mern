@@ -7,7 +7,6 @@ const FormField = ({
   placeholder,
   value,
   handleChange,
-  handleSubmit,
   handleSurpriseMe,
   isSurpriseMe,
 }) => {

@@ -10,11 +10,19 @@ const CreatePost = () => {
     prompt: "",
     photo: "",
   });
+
   const [generatingImg, setGeneratingImg] = useState(false);
   const [loading, setLoading] = useState(false);
   const handleSubmit = () => {};
-  const handleChange = (e) => {};
-  const handleSurpriseMe = () => {};
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+  const handleSurpriseMe = () => {
+    const randomPrompt = getRandomPrompt(form.prompt);
+    setForm({ ...form, prompt: randomPrompt });
+    console.log(randomPrompt);
+  };
+  const generateImg = () => {};
   return (
     <section className="max-w-7xl mx-auto">
       <div>
@@ -63,7 +71,33 @@ const CreatePost = () => {
                 className="1-9/12 h-9/12 object-contain opacity-40"
               />
             )}
+            {generatingImg && (
+              <div className="absolute">
+                <Loader />
+              </div>
+            )}
           </div>
+        </div>
+        <div className="mt-5 flex gap-5">
+          <button
+            type="button"
+            className="text-white sm:bg-red-700 md:bg-blue-700 bg-green-700 font-medium rounded-md text-sm md:w-full sm:w-auto px-5 py-2.5 text-center"
+            onClick={() => generateImg()}
+          >
+            {generatingImg ? "Generating.." : "Generate"}
+          </button>
+        </div>
+        <div className="mt-10">
+          <p className="mt-2 text-[#666e75] text-[14px]">
+            Once you have created the image you want, you can share it with
+            others in the community
+          </p>
+          <button
+            type="submit"
+            className="mt-3 text-white bg-[#6469ff] font-meddium rounded-md text-sm md:w-full w-full sm:w-auto px-5 py-2.5 text-center"
+          >
+            {loading ? "Sharing..." : "Share with the community"}
+          </button>
         </div>
       </form>
     </section>
