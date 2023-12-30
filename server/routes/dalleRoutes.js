@@ -10,7 +10,7 @@ const openai = new OpenAI({
 });
 
 router.route("/").get((req, res) => {
-  res.send("helloo");
+  res.status(200).json({ message: "Hello from DALL-E!" });
 });
 
 router.route("/").post(async (req, res) => {
@@ -27,7 +27,9 @@ router.route("/").post(async (req, res) => {
     res.status(200).json({ photo: image });
   } catch (error) {
     console.log(error);
-    res.status(500).send(error?.response.data.error.mesasge);
+    res
+      .status(500)
+      .send(error?.response.data.error.mesasge || "Something went wrong!");
   }
 });
 
