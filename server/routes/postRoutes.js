@@ -27,7 +27,7 @@ router.route("/").get(async (req, res) => {
 
 router.route("/").post(async (req, res) => {
   try {
-    //get the info from the frontend; destructure it
+    //get the info from the frontend handlesubmtt button; destructure it
     const { name, prompt, photo } = req.body;
     //upload the photo url to cloudinary to be store before creating the instance of the new document(newpost)
     const photoUrl = await cloudinary.uploader.upload(photo);

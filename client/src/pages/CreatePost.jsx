@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { preview } from "../assets";
 import { getRandomPrompt } from "../utils";
 import { FormField, Loader } from "../components";
@@ -13,15 +13,41 @@ const CreatePost = () => {
 
   const [generatingImg, setGeneratingImg] = useState(false);
   const [loading, setLoading] = useState(false);
-  const handleSubmit = () => {};
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (form.prompt && form.photo) {
+      setLoading(true);
+      try {
+        const response = await fetch("http://localhost:8080/api/v1/post", {
+          method: " POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(form),
+        });
+        await response.json();
+        navigate("/");
+      } catch (error) {
+        alert(error);
+      } finally {
+        setLoading(false);
+      }
+    } else {
+      alert("Please enter a prompt and generate an image");
+    }
+  };
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
+
   const handleSurpriseMe = () => {
     const randomPrompt = getRandomPrompt(form.prompt);
     setForm({ ...form, prompt: randomPrompt });
     console.log(randomPrompt);
   };
+
   const generateImg = async () => {
     if (form.prompt) {
       try {
@@ -34,7 +60,7 @@ const CreatePost = () => {
           },
           body: JSON.stringify({ prompt: form.prompt }),
         });
-        const data = await response.json;
+        const data = await response.json();
         setForm({ ...form, photo: `data:image/jpeg;base64,${data.photo}` });
       } catch (error) {
         alert(error);
@@ -103,7 +129,7 @@ const CreatePost = () => {
         <div className="mt-5 flex gap-5">
           <button
             type="button"
-            className="text-white  bg-green-700 w-full font-medium rounded-md text-sm sm:w-auto px-5 py-2.5 text-center"
+            className="text-white  bg-green-700 font-medium rounded-md text-sm sm:w-auto px-5 py-2.5 text-center w-full"
             onClick={() => generateImg()}
           >
             {generatingImg ? "Generating.." : "Generate"}
@@ -112,7 +138,7 @@ const CreatePost = () => {
         <div className="mt-10">
           <p className="mt-2 text-[#666e75] text-[14px]">
             Once you have created the image you want, you can share it with
-            others in the community
+            others in the community.
           </p>
           <button
             type="submit"

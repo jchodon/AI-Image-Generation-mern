@@ -44,7 +44,7 @@ const Home = () => {
               {searchText ? (
                 <RenderCards data={[]} title="No search results found" />
               ) : (
-                <RenderCards data={[]} title="No posts found" />
+                <RenderCards data={[]} title="No posts yet" />
               )}
             </div>
           </>
