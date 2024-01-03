@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState, useEffect } from "react";
 import { Loader, Card, FormField } from "../components/index.js";
 
@@ -18,12 +19,15 @@ const Home = () => {
   const fetchPost = async () => {
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:8080/api/v1/post", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_SERVER_URL}/api/v1/post`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       if (response.ok) {
         const result = await response.json();
         //reverse to show the newest post at the top
@@ -39,20 +43,6 @@ const Home = () => {
     fetchPost();
   }, []);
   //debouncing with settimeout to delay the execution of the search filter logic by 500 ms.the search will only be performed 500 milliseconds after the user stops typing, rather than on every keystroke
-  // const handleSearchChange = (e) => {
-  //   clearTimeout(searchTimeout);
-  //   setSearchText(e.target.value);
-  //   setSearchTimeout(
-  //     setTimeout(() => {
-  //       const searchResult = allPosts.filter(
-  //         (item) =>
-  //           item.name.toLowerCase().includes(searchText.toLowerCase()) ||
-  //           item.prompt.toLowerCase().includes(searchText.toLowerCase())
-  //       );
-  //       setSearchedResults(searchResult);
-  //     }, 500)
-  //   );
-  // };
   const handleSearchChange = (e) => {
     const currentInput = e.target.value;
     clearTimeout(searchTimeout);
