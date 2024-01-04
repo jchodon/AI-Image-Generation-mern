@@ -85,6 +85,6 @@ This Project was completed with the following sources:
 
 ### Contact 
 
-> [https://jigmechodon.netlify.app/](https://www.amitmerchant.com) &nbsp;&middot;&nbsp;
+> [https://jigmechodon.com/](https://www.jigmechodon.com) &nbsp;&middot;&nbsp;
 > GitHub [@jchodon](https://github.com/jchodon) &nbsp;&middot;&nbsp;
 > LinkedIn [@jigmeC](https://www.linkedin.com/in/jigmec/)
